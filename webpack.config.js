@@ -13,6 +13,9 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
     modules: [path.join(__dirname, 'src'), 'node_modules']
   },
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     rules: [
       {
