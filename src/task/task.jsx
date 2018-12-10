@@ -2,13 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 class Task extends PureComponent {
-  /*
-  shouldComponentUpdate(nextProps) {
-    const { isCompleted } = this.props.task;
 
-    return nextProps.task.isCompleted !== isCompleted;
-  }
-  */
   render() {
     const { task, toggleTask } = this.props;
     console.log(`render-task-${task.id}`);

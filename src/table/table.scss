@@ -1,0 +1,112 @@
+.table-food {
+  &__title {
+    font-size: 16px;
+    color: #79878e;
+    margin-bottom: 5px;
+  }
+
+  &__name {
+    width: 15%;
+  }
+
+  &__cal {
+    width: 10%;
+  }
+
+  &__prot,
+  &__fat,
+  &__carb {
+    width: 8%;
+  }
+
+  &__info {
+    width: 30%;
+  }
+
+  &__buttons {
+    width: 25%;
+  }
+}
+
+.table td,
+.table th {
+  padding: 10px 10px;
+}
+
+.table th {
+  text-align: left;
+  background-color: var(--color-light-grey);
+  font-weight: bold;
+}
+
+.table tr:nth-child(odd) {
+  background-color: var(--color-light);
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-diet {
+  &__name {
+    width: 25%;
+  }
+
+  &__products {
+    width: 30%;
+    padding-left: 30px;
+  }
+
+  &__info {
+    width: 45%;
+  }
+}
+
+.list-food {
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.sort-th {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    right: 5px;
+    border: 2px solid;
+    border-color: #eee #eee transparent transparent;
+  }
+
+  &::before {
+    margin-top: -5px;
+    transform: rotate(-45deg);
+  }
+
+  &::after {
+    transform: rotate(135deg);
+  }
+
+  &.sort-ASC {
+    &::after {
+      border-color: #333 #333 transparent transparent;
+    }
+  }
+
+  &.sort-DESC {
+    &::before {
+      border-color: #333 #333 transparent transparent;
+    }
+  }
+}

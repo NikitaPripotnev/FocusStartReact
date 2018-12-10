@@ -1,14 +1,37 @@
-@import "../tasks/tasks.scss";
-@import "../about/about.scss";
+:root {
+  --color-primary: #358ed7;
+  --color-secondary: #34495e;
+  --color-light: #f8f4f4;
+  --color-red: #f54b5e;
+  --color-green: #48d2a0;
+  --color-yellow: #f8c61c;
+  --color-white: #fff;
+  --color-labels: #858585;
+  --color-light-grey: #adafb2;
+  --color-grey: #79878e;
+  --opacity-disabled: 0.5;
+  --font-size-h1: 64px;
+  --font-size-h2: 48px;
+  --font-size-h3: 40px;
+  --font-size-h4: 36px;
+  --font-size-h5: 24px;
+  --font-size-other: 14px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html,
 body {
+  font-family: "Arial", sans-serif;
   font-size: 16px;
-  font-weight: bold;
+}
 
-  margin: 0;
-  padding: 0;
-  color: #002341;
+.root {
+  width: 100%;
 }
 
 .link {
@@ -16,3 +39,8 @@ body {
   margin-right: 20px;
   font-size: 20px;
 }
+
+@import "../tasks/tasks.scss";
+@import "../about/about.scss";
+@import "../table/table.scss";
+@import "../header/header.scss";
