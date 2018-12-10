@@ -40,6 +40,11 @@ body {
   font-size: 20px;
 }
 
+.add-task__button {
+  width: 100px;
+  height: 50px;
+}
+
 @import "../tasks/tasks.scss";
 @import "../about/about.scss";
 @import "../table/table.scss";

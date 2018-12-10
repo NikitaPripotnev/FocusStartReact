@@ -4,6 +4,17 @@ import Header from '../header/header';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Tasks from '../tasks/tasks';
 import About from '../about/about';
+import createRequest from '../core/create-request';
+import { fetchFood } from '../core/api-config';
+
+let dataTable;
+createRequest(fetchFood).then(({ status, data }) => {
+  if (status === 'OK') {
+    dataTable = data.values();
+    console.log(dataTable, 'dataTable');
+  }
+});
+
 
 const TABLE_HEADER = [
   {
@@ -73,8 +84,10 @@ const TABLE_DATA = [
   ]
 ];
 
+
+
 function Root() {
-  /*
+  
   return(
     <BrowserRouter>
       <div>
@@ -85,13 +98,16 @@ function Root() {
       </div>
     </BrowserRouter>
   );
-  */
+
+ /*
   return (
     <div>
       <Header />
       <SortTable headers={TABLE_HEADER} data={TABLE_DATA} className="table table-food" />
     </div>
   );
+  */
 }
+
 
 export default Root;

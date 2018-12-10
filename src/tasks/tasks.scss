@@ -1,5 +1,4 @@
 body {
-
 }
 
 .test {
@@ -18,4 +17,8 @@ body {
     text-decoration: line-through;
     text-decoration-color: red;
   }
+}
+
+.tasks_isLoading {
+  background-color: red;
 }

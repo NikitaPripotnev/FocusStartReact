@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
 import sortMultidimensionalArrayFunc from 'sort-multidimensional-array-func';
-import SortTableHeader from './sortTableHeader';
-import SortTableBody from './sortTableBody'
 import PropTypes from 'prop-types';
-
+import SortTableHeader from './sortTableHeader';
+import SortTableBody from './sortTableBody';
+import createRequest from '../core/create-request';
+import { fetchFood } from '../core/api-config';
+import classNames from '../core/class-names/class-names';
 
 class SortTable extends PureComponent {
   state = {
@@ -12,11 +14,20 @@ class SortTable extends PureComponent {
     className: ''
   };
 
+  // let data = [];
   componentWillMount() {
+    createRequest(fetchFood).then((result) => {
+      console.log(result);
+      // data = result.data[0].values();
+    });
+
     const { data, headers, className } = this.props;
     this.setState({ data, headers, className });
   }
 
+  /*
+
+*/
   componentWillReceiveProps(nextProps) {
     const { data, headers, className } = nextProps;
     this.setState({ data, headers, className });

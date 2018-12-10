@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Task from '../task/task';
+import classNames from '../core/class-names/class-names';
+import createRequest from '../core/create-request';
+import { fetchFood, createTask } from '../core/api-config';
+import AddTask from '../addTask/addTask';
+
 
 class Tasks extends Component {
+  /*
+  static propTypes = {
+    addTask: PropTypes.func.isRequired
+  }
+*/
   state = {
-    tasks: [
-      { id: '1', text: 'React', isCompleted: true },
-      { id: '2', text: 'Props', isCompleted: true },
-      { id: '3', text: 'State', isCompleted: false },
-      { id: '4', text: 'Yesteday', isCompleted: true },
-      { id: '5', text: 'ufuf', isCompleted: false },
-      { id: '6', text: 'hello', isCompleted: true }
-    ]
+    isLoading: true,
+    tasks: []
   };
+
+  componentDidMount() {
+    createRequest(fetchFood).then(({ status, data }) => {
+      if (status === 'OK') {
+        this.setState({ isLoading: false, tasks: data });
+      }
+    });
+  }
 
   toggleTask = (event) => {
     const { id } = event.currentTarget.dataset;
@@ -28,13 +41,27 @@ class Tasks extends Component {
     }));
   };
 
+  addTask = (text) => {
+    this.State({ isLoading: true });
+
+    createRequest(createTask, null, { text }).then(({ status, data }) => {
+      if (status === 'OK') {
+        this.setState(({ tasks }) => ({
+          isLoading: false,
+          tasks: tasks.concat(data)
+        }));
+      }
+    });
+  }
+
   render() {
-    const { tasks } = this.state;
+    const { tasks, isLoading } = this.state;
     return (
-      <div className="tasks">
+      <div className={classNames('tasks', { loading: isLoading })}>
         {tasks.map(task => (
-          <Task task={task} toggleTask={this.toggleTask} key={task.id} />
+          <Task task={task} toggleTask={this.toggleTask} key={task.id}/>       
         ))}
+        {!isLoading && <AddTask addTask={this.addTask} />}
       </div>
     );
   }
