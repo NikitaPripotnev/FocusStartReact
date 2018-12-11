@@ -6,7 +6,6 @@ import createRequest from '../core/create-request';
 import { fetchFood, createTask } from '../core/api-config';
 import AddTask from '../addTask/addTask';
 
-
 class Tasks extends Component {
   /*
   static propTypes = {
@@ -22,6 +21,7 @@ class Tasks extends Component {
     createRequest(fetchFood).then(({ status, data }) => {
       if (status === 'OK') {
         this.setState({ isLoading: false, tasks: data });
+        console.log(this.state.tasks, 'tasks');
       }
     });
   }
@@ -42,7 +42,7 @@ class Tasks extends Component {
   };
 
   addTask = (text) => {
-    this.State({ isLoading: true });
+    this.setState({ isLoading: true });
 
     createRequest(createTask, null, { text }).then(({ status, data }) => {
       if (status === 'OK') {
@@ -52,14 +52,14 @@ class Tasks extends Component {
         }));
       }
     });
-  }
+  };
 
   render() {
     const { tasks, isLoading } = this.state;
     return (
       <div className={classNames('tasks', { loading: isLoading })}>
         {tasks.map(task => (
-          <Task task={task} toggleTask={this.toggleTask} key={task.id}/>       
+          <Task task={task} toggleTask={this.toggleTask} key={task.id} />
         ))}
         {!isLoading && <AddTask addTask={this.addTask} />}
       </div>

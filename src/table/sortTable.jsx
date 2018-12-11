@@ -16,21 +16,24 @@ class SortTable extends PureComponent {
 
   // let data = [];
   componentWillMount() {
-    createRequest(fetchFood).then((result) => {
-      console.log(result);
-      // data = result.data[0].values();
-    });
-
     const { data, headers, className } = this.props;
     this.setState({ data, headers, className });
+    console.log("Скоро смонтируюсь");
   }
 
-  /*
+  componentDidMount() {
+    createRequest(fetchFood).then(({ status, data }) => {
+      if (status === 'OK') {
+        this.setState({ data: data });
+        console.log("Я тут смонтировался");
+      }
+    });
+  }
 
-*/
   componentWillReceiveProps(nextProps) {
     const { data, headers, className } = nextProps;
     this.setState({ data, headers, className });
+    console.log("А тут я получил новые пропсы");
   }
 
   sortTableFunc = (id, sortMethod) => {
@@ -56,9 +59,9 @@ class SortTable extends PureComponent {
       ...elem,
       sort: index == id ? currentSortMethod : 'default'
     }));
-
+    //Сортировка только с массивом
     const sortData = sortMultidimensionalArrayFunc(data, id, currentSortMethod);
-
+    console.log(this.state.data, sortData, 'Сортировка');
     this.setState({
       data: sortData,
       headers: changeHeaders

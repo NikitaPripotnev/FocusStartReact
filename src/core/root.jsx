@@ -7,16 +7,13 @@ import About from '../about/about';
 import createRequest from '../core/create-request';
 import { fetchFood } from '../core/api-config';
 
-let dataTable;
-createRequest(fetchFood).then(({ status, data }) => {
-  if (status === 'OK') {
-    dataTable = data.values();
-    console.log(dataTable, 'dataTable');
-  }
-});
-
 
 const TABLE_HEADER = [
+  {
+    label: 'id',
+    sort: 'default',
+    class: 'table-food__id'
+  },
   {
     label: 'Наименование',
     sort: 'default',
@@ -54,40 +51,11 @@ const TABLE_HEADER = [
   }
 ];
 
-const TABLE_DATA = [
-  [
-    'Яблоко',
-    52,
-    0.3,
-    0.2,
-    14,
-    'Яблоко - плод яблони, который употребляется в пищу в свежем виде, служит сырьём в кулинарии и для приготовления напитков.',
-    ''
-  ],
-  [
-    'Картофель',
-    77,
-    2,
-    0.1,
-    17,
-    'Картофель - это крахмалистая, клубнеплодная культура из многолетней пасленовой соляной туберозы.',
-    ''
-  ],
-  [
-    'Кефир 1%',
-    40,
-    2.8,
-    1,
-    4,
-    'Кефир – один из самых распространённых кисломолочных напитков, спиртосодержащий продукт.',
-    ''
-  ]
-];
-
+const TABLE_DATA = [];
 
 
 function Root() {
-  
+/*
   return(
     <BrowserRouter>
       <div>
@@ -98,15 +66,15 @@ function Root() {
       </div>
     </BrowserRouter>
   );
+*/  
 
- /*
   return (
     <div>
       <Header />
       <SortTable headers={TABLE_HEADER} data={TABLE_DATA} className="table table-food" />
     </div>
   );
-  */
+
 }
 
 
