@@ -24,8 +24,8 @@ class SortTable extends PureComponent {
   componentDidMount() {
     createRequest(fetchFood).then(({ status, data }) => {
       if (status === 'OK') {
-        this.setState({ data: data });
-        console.log("Я тут смонтировался");
+        this.setState({ data: Object.values(data) });
+        console.log('Я тут смонтировался');
       }
     });
   }
