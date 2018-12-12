@@ -3,6 +3,7 @@ import { fetchFood, fetchFoodItem } from '../core/api-config';
 import SortTable from '../table/sortTable';
 import SearchFood from './searchFood/searchFood';
 import ButtonAddFood from './buttonAddFood/buttonAddFood';
+import AddFoodForm from '../addFoodWrapper/addFoodForm/addFoodForm';
 import createRequest from '../core/create-request';
 
 class FoodWrapper extends PureComponent {
@@ -82,6 +83,7 @@ class FoodWrapper extends PureComponent {
           <SortTable headers={TABLE_HEADER} data={DATA_TABLE_FOOD} className="table table-food" />
         )}
         <ButtonAddFood  onClick="" />
+        <AddFoodForm />
       </div>
     );
   }
