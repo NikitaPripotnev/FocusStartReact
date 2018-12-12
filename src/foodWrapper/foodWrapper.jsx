@@ -58,7 +58,7 @@ class FoodWrapper extends PureComponent {
   componentDidMount() {
     createRequest(fetchFood).then(({ status, data }) => {
       if (status === 'OK') {
-        this.setState({ DATA_TABLE_FOOD: data.map(elem => Object.values(elem)) });
+        this.setState({ DATA_TABLE_FOOD: data });
       }
     });
   }
@@ -67,7 +67,7 @@ class FoodWrapper extends PureComponent {
     createRequest(fetchFoodItem, { name }, null).then(({ status, data }) => {
       if (status === 'OK') {
         console.log(data, 'changeData, status - OK');
-        this.setState({ DATA_TABLE_FOOD: Object.values(data[0]) });
+        this.setState({ DATA_TABLE_FOOD: data });
       } else {
         console.log('changeData, status - BAD');
       }

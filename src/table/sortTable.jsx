@@ -16,7 +16,7 @@ class SortTable extends PureComponent {
 
   // let data = [];
   componentWillMount() {
-    const { data, headers} = this.props;
+    const { data, headers } = this.props;
     this.setState({ data, headers });
     console.log("Скоро смонтируюсь");
   }
