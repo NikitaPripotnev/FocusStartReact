@@ -5,7 +5,7 @@ import SortTableHeader from './sortTableHeader';
 import SortTableBody from './sortTableBody';
 import createRequest from '../core/create-request';
 import { fetchFood } from '../core/api-config';
-import classNames from '../core/class-names/class-names';
+
 
 class SortTable extends PureComponent {
   state = {
@@ -16,24 +16,15 @@ class SortTable extends PureComponent {
 
   // let data = [];
   componentWillMount() {
-    const { data, headers, className } = this.props;
-    this.setState({ data, headers, className });
+    const { data, headers} = this.props;
+    this.setState({ data, headers });
     console.log("Скоро смонтируюсь");
   }
 
-  componentDidMount() {
-    createRequest(fetchFood).then(({ status, data }) => {
-      if (status === 'OK') {
-        this.setState({ data: Object.values(data) });
-        console.log('Я тут смонтировался');
-      }
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
-    const { data, headers, className } = nextProps;
-    this.setState({ data, headers, className });
-    console.log("А тут я получил новые пропсы");
+    const { data, headers} = nextProps;
+    this.setState({ data, headers });
+    console.log(nextProps, "А тут я получил новые пропсы");
   }
 
   sortTableFunc = (id, sortMethod) => {
@@ -59,7 +50,6 @@ class SortTable extends PureComponent {
       ...elem,
       sort: index == id ? currentSortMethod : 'default'
     }));
-    //Сортировка только с массивом
     const sortData = sortMultidimensionalArrayFunc(data, id, currentSortMethod);
     console.log(this.state.data, sortData, 'Сортировка');
     this.setState({
@@ -69,8 +59,9 @@ class SortTable extends PureComponent {
   };
 
   render() {
-    const { headers, data, className } = this.state;
-
+    const { headers, data } = this.state;
+    const { className } = this.props;
+    console.log(className, 'in render table');
     return (
       <table className={className}>
         <SortTableHeader headers={headers} onClick={this.sortTableFunc} />

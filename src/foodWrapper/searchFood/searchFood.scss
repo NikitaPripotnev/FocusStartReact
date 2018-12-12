@@ -1,0 +1,20 @@
+.input {
+  border-radius: 3px;
+  border: solid 1px #ddd;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px;
+  color: var(--color-secondary);
+  display: inline-block;
+  width: 100%;
+
+  &_search {
+    max-width: 300px;
+    padding-left: 45px;
+    background: url("svg/icon-search.svg") no-repeat 10px center;
+  }
+
+  &_search:active {
+    border-color: #55acee;
+  }
+}

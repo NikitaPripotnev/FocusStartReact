@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 class Task extends PureComponent {
-
   render() {
     const { task, toggleTask } = this.props;
     console.log(`render-task-${task.id}`);

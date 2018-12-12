@@ -24,11 +24,11 @@
   }
 
   &__info {
-    width: 30%;
+    width: 25%;
   }
 
   &__buttons {
-    width: 15%;
+    width: 20%;
   }
 }
 
@@ -102,13 +102,13 @@
     transform: rotate(135deg);
   }
 
-  &.sort-ASC {
+  &_asc {
     &::after {
       border-color: #333 #333 transparent transparent;
     }
   }
 
-  &.sort-DESC {
+  &_desc {
     &::before {
       border-color: #333 #333 transparent transparent;
     }

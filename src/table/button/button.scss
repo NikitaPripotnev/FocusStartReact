@@ -1,0 +1,28 @@
+.button {
+  border-radius: 3px;
+  color: var(--color-white);
+  border: none;
+  font-size: 13px;
+  display: inline-block;
+  text-transform: uppercase;
+
+  &_icon {
+    text-align: center;
+    position: relative;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    padding: 5px 10px;
+    height: 70%;
+    width: 45%;
+
+    &_delete {
+      background-color: var(--color-red);
+      float: right;
+    }
+
+    &_edit {
+      background-color: var(--color-yellow);
+      float: left;
+    }
+  }
+}

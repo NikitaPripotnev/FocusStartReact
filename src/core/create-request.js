@@ -14,6 +14,7 @@ const compileUrl = (url, params) => {
         }
       } else {
         const key = item.substring(1);
+
         if (options[key]) {
           resultArr.push(options[key]);
           delete options[key];
