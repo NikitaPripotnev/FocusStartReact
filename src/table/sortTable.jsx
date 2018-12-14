@@ -10,22 +10,29 @@ import { fetchFood } from '../core/api-config';
 class SortTable extends PureComponent {
   state = {
     data: [],
-    headers: [],
-    className: ''
+    headers: []
   };
 
-  // let data = [];
   componentWillMount() {
     const { data, headers } = this.props;
-    this.setState({ data, headers });
+    this.setState({ data: this.objToArr(data), headers });
     console.log("Скоро смонтируюсь");
   }
 
   componentWillReceiveProps(nextProps) {
     const { data, headers} = nextProps;
-    this.setState({ data, headers });
+    this.setState({ data: this.objToArr(data), headers });
     console.log(nextProps, "А тут я получил новые пропсы");
   }
+
+  objToArr = (data) => {
+    if (Array.isArray(data)) {
+      console.log('its Array!');
+      return (data.map(elem => Object.values(elem)));
+    }
+    console.log('its not Array!');
+    return ([Object.values(data)]);
+  };
 
   sortTableFunc = (id, sortMethod) => {
     const { data, headers } = this.state;
@@ -51,11 +58,11 @@ class SortTable extends PureComponent {
       sort: index == id ? currentSortMethod : 'default'
     }));
     const sortData = sortMultidimensionalArrayFunc(data, id, currentSortMethod);
-    console.log(this.state.data, sortData, 'Сортировка');
     this.setState({
       data: sortData,
       headers: changeHeaders
     });
+    console.log(currentSortMethod, this.state.headers, this.state.data, sortData, 'Сортировка');
   };
 
   render() {

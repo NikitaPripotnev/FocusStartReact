@@ -1,9 +1,20 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 
-const ButtonAddFood = (props) => {
-  const { onClick } = props;
-
-  return <button className="button button_add-food" type="button" onClick={onClick}>Добавить новый продукт</button>;
-};
+const ButtonAddFood = () => (
+  <Route
+    render={({ history }) => (
+      <button
+        className="button button_add-food"
+        type="button"
+        onClick={() => {
+          history.push('/food/add');
+        }}
+      >
+        Добавить новый продукт
+      </button>
+    )}
+  />
+);
 
 export default ButtonAddFood;

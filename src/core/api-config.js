@@ -8,7 +8,12 @@ export const fetchFoodItem = {
   method: 'GET'
 };
 
-export const createTask = {
-  path: '/api/v1/tasks',
+export const createFood = {
+  path: '/api/food',
   method: 'POST'
+};
+
+export const deleteFoodItem = {
+  path: '/api/food/:id',
+  method: 'DELETE'
 };

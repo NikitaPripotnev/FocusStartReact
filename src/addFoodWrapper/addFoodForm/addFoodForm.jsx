@@ -1,5 +1,8 @@
 import React, { PureComponent, createRef } from 'react';
+import createRequest from '../../core/create-request';
+import { createFood } from '../../core/api-config';
 import PropTypes from 'prop-types';
+
 
 class AddFoodForm extends PureComponent {
   constructor(props) {
@@ -10,23 +13,23 @@ class AddFoodForm extends PureComponent {
         name: 'name'
       },
       {
-        label: 'Наименование:',
+        label: 'Калории:',
         name: 'cal'
       },
       {
-        label: 'Наименование:',
+        label: 'Белки:',
         name: 'prot'
       },
       {
-        label: 'Наименование:',
+        label: 'Жиры:',
         name: 'fat'
       },
       {
-        label: 'Наименование:',
+        label: 'Углеводы:',
         name: 'carb'
       },
       {
-        label: 'Наименование:',
+        label: 'Информация:',
         name: 'info'
       }
     ];
@@ -37,10 +40,19 @@ class AddFoodForm extends PureComponent {
 
   onSubmit = (event) => {
     event.preventDefault();
-    console.log(
-      this.fields, 
-      'textRefs in AddFood'
-    );
+    const reducer = (accumulator, currentValue) => Object.assign(accumulator, currentValue);
+    console.log('textRefs in AddFood');
+    createRequest(
+      createFood,
+      null,
+      this.fields.map(item => ({ [item.name]: item.ref.current.value })).reduce(reducer),
+    ).then(({ status, data }) => {
+      if (status === 'OK') {
+        console.log(data, 'POST status - OK');
+      } else {
+        console.log('status - BAD');
+      }
+    });
     // this.textRef.current.value = '';
   };
 
@@ -55,7 +67,7 @@ class AddFoodForm extends PureComponent {
               id={`food-item-${item.name}`}
               className="input"
               name="text"
-              ref={this.item.ref}
+              ref={item.ref}
             />
           </label>
         ))}

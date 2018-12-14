@@ -1,31 +1,19 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Header from '../header/header';
 import FoodWrapper from '../foodWrapper/foodWrapper';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import Tasks from '../tasks/tasks';
-import About from '../about/about';
+import AddFoodForm from '../addFoodWrapper/addFoodForm/addFoodForm';
 
 function Root() {
-/*
-  return(
+  return (
     <BrowserRouter>
       <div>
-        <Link className="link" to="/">tasks</Link>
-        <Link className="link" to="/about">about</Link>
-        <Route exact path="/" component={Tasks} />
-        <Route path="/about" component={About} />
+        <Header />
+        <Route exact path="/" component={FoodWrapper} />
+        <Route path="/food/add" component={AddFoodForm} />
       </div>
     </BrowserRouter>
   );
-*/  
-
-  return (
-    <div>
-      <Header />
-      <FoodWrapper />
-    </div>
-  );
-
 }
 
 
