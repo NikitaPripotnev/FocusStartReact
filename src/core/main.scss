@@ -34,21 +34,45 @@ body {
   width: 100%;
 }
 
-.link {
-  color: #000;
-  margin-right: 20px;
-  font-size: 20px;
+.wrapper {
+  padding: 1vh 1vw;
 }
 
-.add-task__button {
-  width: 100px;
-  height: 50px;
+.input {
+  border-radius: 3px;
+  border: solid 1px #ddd;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px;
+  color: var(--color-secondary);
+  display: inline-block;
+  width: 100%;
 }
 
-@import "../tasks/tasks.scss";
-@import "../about/about.scss";
-@import "../table/table.scss";
+.button {
+  border-radius: 3px;
+  color: var(--color-white);
+  border: none;
+  font-size: 13px;
+  display: inline-block;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+
+  &_width100 {
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+  }
+}
+
 @import "../header/header.scss";
+@import "../navMenu/navMenu.scss";
+@import "../home/home.scss";
+@import "../addFoodWrapper/addFoodWrapper.scss";
+@import "../table/table.scss";
 @import "../table/button/button.scss";
+@import "../foodWrapper/foodWrapper.scss";
 @import "../foodWrapper/searchFood/searchFood.scss";
 @import "../foodWrapper/buttonAddFood/buttonAddFood.scss";
+@import "../notificiantBanners/notificiantBanners.scss";

@@ -3,8 +3,6 @@ import sortMultidimensionalArrayFunc from 'sort-multidimensional-array-func';
 import PropTypes from 'prop-types';
 import SortTableHeader from './sortTableHeader';
 import SortTableBody from './sortTableBody';
-import createRequest from '../core/create-request';
-import { fetchFood } from '../core/api-config';
 
 
 class SortTable extends PureComponent {
@@ -16,23 +14,26 @@ class SortTable extends PureComponent {
   componentWillMount() {
     const { data, headers } = this.props;
     this.setState({ data: this.objToArr(data), headers });
-    console.log("Скоро смонтируюсь");
   }
 
   componentWillReceiveProps(nextProps) {
-    const { data, headers} = nextProps;
+    const { data, headers } = nextProps;
     this.setState({ data: this.objToArr(data), headers });
-    console.log(nextProps, "А тут я получил новые пропсы");
+    console.log(nextProps, 'А тут я получил новые пропсы');
   }
 
   objToArr = (data) => {
     if (Array.isArray(data)) {
-      console.log('its Array!');
       return (data.map(elem => Object.values(elem)));
     }
-    console.log('its not Array!');
     return ([Object.values(data)]);
   };
+
+  changeDataByDelete = (id) => {
+    this.setState(state => ({
+      data: state.data.filter(element => element[0] !== id)
+    }));
+  }
 
   sortTableFunc = (id, sortMethod) => {
     const { data, headers } = this.state;
@@ -55,14 +56,13 @@ class SortTable extends PureComponent {
 
     const changeHeaders = headers.map((elem, index) => ({
       ...elem,
-      sort: index == id ? currentSortMethod : 'default'
+      sort: index === id ? currentSortMethod : 'default'
     }));
     const sortData = sortMultidimensionalArrayFunc(data, id, currentSortMethod);
     this.setState({
       data: sortData,
       headers: changeHeaders
     });
-    console.log(currentSortMethod, this.state.headers, this.state.data, sortData, 'Сортировка');
   };
 
   render() {
@@ -72,7 +72,7 @@ class SortTable extends PureComponent {
     return (
       <table className={className}>
         <SortTableHeader headers={headers} onClick={this.sortTableFunc} />
-        <SortTableBody data={data} />
+        <SortTableBody data={data} changeDataByDelete={this.changeDataByDelete} />
       </table>
     );
   }

@@ -1,28 +1,42 @@
 import React, { PureComponent } from 'react';
-import createRequest from '../../core/create-request';
+import BannerDelete from '../../notificiantBanners/bannerDelete';
 
 class ButtonDelete extends PureComponent {
+  state = {
+    banner: false
+  };
+
   onClick = () => {
-    const { id, request } = this.props;
-    createRequest(
-      request,
-      { id },
-      null
-    ).then(({ status }) => {
-      if (status === 'OK') {
-        console.log('DELETE status - OK');
-      } else {
-        console.log('DELETE status - BAD');
-      }
-    });
+    this.changeBannerStatus(true);
+  };
+
+  changeBannerStatus = (flag) => {
+    this.setState({ banner: flag });
   };
 
   render() {
-    const { title } = this.props;
+    const {
+      title, id, request, changeDataByDelete
+    } = this.props;
+    const { banner } = this.state;
     return (
-      <button className="button button_icon button_icon_delete" type="button" onClick={this.onClick}>
-        {title}
-      </button>
+      <div>
+        {banner && (
+          <BannerDelete
+            changeBannerStatus={this.changeBannerStatus}
+            id={id}
+            request={request}
+            changeDataByDelete={changeDataByDelete}
+          />
+        )}
+        <button
+          className="button button_icon button_icon_delete"
+          type="button"
+          onClick={this.onClick}
+        >
+          {title}
+        </button>
+      </div>
     );
   }
 }

@@ -1,21 +1,21 @@
-.input {
-  border-radius: 3px;
-  border: solid 1px #ddd;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 10px;
-  color: var(--color-secondary);
-  display: inline-block;
-  width: 100%;
-
-  &_search {
+.form-search {
+  &__input {
     max-width: 300px;
     padding-left: 45px;
     background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjNDk5MEUyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS13aWR0aD0iMiI+CiAgICAgICAgPHBhdGggZD0iTTE5LjYgMjAuNGw1LjYgNS42TTIyLjggMTRjMCA0LjQxOC0zLjc2MSA4LTguNCA4QzkuNzYgMjIgNiAxOC40MTggNiAxNHMzLjc2LTggOC40LThjNC42MzkgMCA4LjQgMy41ODIgOC40IDh6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=)
       no-repeat 10px center;
+    margin: 10px 10px 10px 0;
+
+    &:active {
+      border-color: #55acee;
+    }
   }
 
-  &_search:active {
-    border-color: #55acee;
+  &__button {
+    padding: 10px;
+
+    &:hover {
+      background-color: var(--color-primary);
+    }
   }
 }

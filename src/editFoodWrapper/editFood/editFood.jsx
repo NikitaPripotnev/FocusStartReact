@@ -1,10 +1,10 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import createRequest from '../../core/create-request';
-import { createFood } from '../../core/api-config';
+import { fetchFoodId, patchFood } from '../../core/api-config';
 import BannerSuccess from '../../notificiantBanners/bannerSuccess';
 
-class AddFoodForm extends PureComponent {
+class EditFood extends PureComponent {
   constructor(props) {
     super(props);
     this.fields = [
@@ -39,19 +39,37 @@ class AddFoodForm extends PureComponent {
   }
 
   state = {
-    banner: false
+    banner: false,
+    id: '1'
   };
+
+  componentDidMount() {
+    const { id } = this.state;
+    createRequest(fetchFoodId, { id }, null).then(({ status, data }) => {
+      if (status === 'OK') {
+        const dataArray = Object.values(data);
+        dataArray.splice(0, 1);
+        console.log(data, dataArray, 'data and dataArray');
+        this.fields.forEach((fieldItem, index) => {
+          fieldItem.ref.current.value = dataArray[index];
+        });
+      } else {
+        console.log('changeData, status - BAD');
+      }
+    });
+  }
 
   changeBannerStatus = (flag) => {
     this.setState({ banner: flag });
   };
 
   onSubmit = (event) => {
+    const { id } = this.state;
     event.preventDefault();
     const reducer = (accumulator, currentValue) => Object.assign(accumulator, currentValue);
     createRequest(
-      createFood,
-      null,
+      patchFood,
+      { id },
       this.fields.map(item => ({ [item.name]: item.ref.current.value })).reduce(reducer)
     ).then(({ status, data }) => {
       if (status === 'OK') {
@@ -88,12 +106,12 @@ class AddFoodForm extends PureComponent {
           ))}
 
           <button type="submit" className="button button_width100 add-form__button">
-            Добавить
+             Сохранить изменения
           </button>
         </form>
         {banner && (
           <BannerSuccess
-            message="Продукт успешно добавлен"
+            message="Изменения успешно сохранены"
             changeBannerStatus={this.changeBannerStatus}
           />
         )}
@@ -102,4 +120,4 @@ class AddFoodForm extends PureComponent {
   }
 }
 
-export default AddFoodForm;
+export default EditFood;

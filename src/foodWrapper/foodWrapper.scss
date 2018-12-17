@@ -1,0 +1,7 @@
+.food-wrapper {
+  &__button {
+    &:hover {
+      background-color: var(--color-green);
+    }
+  }
+}

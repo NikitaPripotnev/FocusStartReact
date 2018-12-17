@@ -3,14 +3,7 @@ import classNames from '../core/class-names/class-names';
 
 const SortTableHeader = (props) => {
   const { headers, onClick } = props;
-  /*
-  let classNameTh = '';
-          if (element.sort === 'asc') {
-            classNameTh = 'sort-ASC';
-          } else if (element.sort === 'desc') {
-            classNameTh = 'sort-DESC';
-          }
-  */
+
   return (
     <thead>
       <tr>

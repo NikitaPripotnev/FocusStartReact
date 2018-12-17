@@ -1,4 +1,4 @@
-import React, { PureComponent, Link } from 'react';
+import React, { PureComponent } from 'react';
 import { fetchFood, fetchFoodItem } from '../core/api-config';
 import SortTable from '../table/sortTable';
 import SearchFood from './searchFood/searchFood';
@@ -76,7 +76,7 @@ class FoodWrapper extends PureComponent {
   render() {
     const { DATA_TABLE_FOOD, isLoadingTableFood, TABLE_HEADER } = this.state;
     return (
-      <div>
+      <div className="wrapper">
         <SearchFood changeData={this.changeData} />
         {!isLoadingTableFood && (
           <SortTable headers={TABLE_HEADER} data={DATA_TABLE_FOOD} className="table table-food" />

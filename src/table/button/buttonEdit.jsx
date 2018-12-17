@@ -1,16 +1,23 @@
 import React, { PureComponent } from 'react';
+import { Route } from 'react-router-dom';
 
 class ButtonEdit extends PureComponent {
-  onClick = () => {
-    console.log('PATCH in developing');
-  };
-
   render() {
-    const { title } = this.props;
+    const { title, id } = this.props;
     return (
-      <button className="button button_icon button_icon_edit" type="button" onClick={this.onClick}>
-        {title}
-      </button>
+      <Route
+        render={({ history }) => (
+          <button
+            className="button button_icon button_icon_edit"
+            type="button"
+            onClick={() => {
+              history.push(`/editFood/${id}`);
+            }}
+          >
+            {title}
+          </button>
+        )}
+      />
     );
   }
 }

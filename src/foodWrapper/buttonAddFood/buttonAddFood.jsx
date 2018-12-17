@@ -5,10 +5,10 @@ const ButtonAddFood = () => (
   <Route
     render={({ history }) => (
       <button
-        className="button button_add-food"
+        className="button button_width100 food-wrapper__button"
         type="button"
         onClick={() => {
-          history.push('/food/add');
+          history.push('/addFood');
         }}
       >
         Добавить новый продукт

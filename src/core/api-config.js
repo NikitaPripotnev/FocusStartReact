@@ -8,9 +8,19 @@ export const fetchFoodItem = {
   method: 'GET'
 };
 
+export const fetchFoodId = {
+  path: '/api/food/:id',
+  method: 'GET'
+};
+
 export const createFood = {
   path: '/api/food',
   method: 'POST'
+};
+
+export const patchFood = {
+  path: '/api/food/:id',
+  method: 'PATCH'
 };
 
 export const deleteFoodItem = {
