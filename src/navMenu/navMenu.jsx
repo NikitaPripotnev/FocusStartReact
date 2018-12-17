@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { NavLink } from 'react-router-dom';
 import ButtonNavMenu from './buttonNavMenu';
 
 class NavMenu extends PureComponent {
@@ -6,14 +7,7 @@ class NavMenu extends PureComponent {
     classNameDietButton: '',
     classNameFoodButton: ''
   };
-
-  componentWillMount() {
-    this.setState({
-      classNameDietButton: localStorage.getItem('classNameDietButton'),
-      classNameFoodButton: localStorage.getItem('classNameFoodButton')
-    });
-  }
-
+  /*
   changeClassForButtons = (event) => {
     const { name } = event.currentTarget.dataset;
     this.setState({
@@ -22,26 +16,24 @@ class NavMenu extends PureComponent {
     });
   };
 
+  changeClasses = (type) => {
+    if (type === 'food' || type === 'Food') {
+      this.setState({ classNameFoodButton: 'nav-menu__button_active', classNameDietButton: '' });
+    } else {
+      this.setState({ classNameDietButton: 'nav-menu__button_active', classNameFoodButton: '' });
+    }
+  };
+  */
+
   render() {
-    const { classNameFoodButton, classNameDietButton } = this.state;
-    localStorage.setItem('classNameDietButton', classNameDietButton);
-    localStorage.setItem('classNameFoodButton', classNameFoodButton);
     return (
       <div className="nav-menu">
-        <ButtonNavMenu
-          dataName="diet"
-          className={`nav-menu__button ${classNameDietButton}`}
-          path="/diet"
-          title="Диеты"
-          onClick={this.changeClassForButtons}
-        />
-        <ButtonNavMenu
-          dataName="food"
-          className={`nav-menu__button ${classNameFoodButton}`}
-          path="/food"
-          title="Продукты"
-          onClick={this.changeClassForButtons}
-        />
+        <NavLink to="/diet" className="nav-menu__button" activeClassName="nav-menu__button_active">
+          Диеты
+        </NavLink>
+        <NavLink to="/food" className="nav-menu__button" activeClassName="nav-menu__button_active">
+          Продукты
+        </NavLink>
       </div>
     );
   }

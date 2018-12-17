@@ -43,6 +43,11 @@ class EditFood extends PureComponent {
     id: '1'
   };
 
+  componentWillMount() {
+    const { id } = this.props;
+    this.setState({ id });
+  }
+
   componentDidMount() {
     const { id } = this.state;
     createRequest(fetchFoodId, { id }, null).then(({ status, data }) => {
@@ -54,7 +59,7 @@ class EditFood extends PureComponent {
           fieldItem.ref.current.value = dataArray[index];
         });
       } else {
-        console.log('changeData, status - BAD');
+        console.log('edit, status - BAD');
       }
     });
   }
@@ -65,6 +70,8 @@ class EditFood extends PureComponent {
 
   onSubmit = (event) => {
     const { id } = this.state;
+    const { history } = this.props;
+
     event.preventDefault();
     const reducer = (accumulator, currentValue) => Object.assign(accumulator, currentValue);
     createRequest(
@@ -74,17 +81,16 @@ class EditFood extends PureComponent {
     ).then(({ status, data }) => {
       if (status === 'OK') {
         this.changeBannerStatus(true);
-        this.fields.forEach((fieldItem) => {
-          fieldItem.ref.current.value = '';
-        });
-        setTimeout(() => {
-          this.changeBannerStatus(false);
-        }, 4000);
         console.log(data, 'POST status - OK');
       } else {
         console.log('status - BAD');
       }
     });
+  };
+
+  goBack = () => {
+    const { history } = this.props;
+    history.goBack();
   };
 
   render() {
@@ -106,13 +112,14 @@ class EditFood extends PureComponent {
           ))}
 
           <button type="submit" className="button button_width100 add-form__button">
-             Сохранить изменения
+            Сохранить изменения
           </button>
         </form>
         {banner && (
           <BannerSuccess
             message="Изменения успешно сохранены"
             changeBannerStatus={this.changeBannerStatus}
+            someFunction={this.goBack}
           />
         )}
       </div>

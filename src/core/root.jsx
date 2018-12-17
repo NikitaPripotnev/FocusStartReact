@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from '../header/header';
-import NavMenu from '../navMenu/navMenu';
 import Home from '../home/home';
 import FoodWrapper from '../foodWrapper/foodWrapper';
 import DietWrapper from '../dietWrapper/dietWrapper';
@@ -13,7 +12,6 @@ function Root() {
     <BrowserRouter>
       <div>
         <Header />
-        <NavMenu />
         <Route exact path="/" component={Home} />
         <Route path="/food" component={FoodWrapper} />
         <Route path="/diet" component={DietWrapper} />

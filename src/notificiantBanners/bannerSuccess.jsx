@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 
 class BannerSuccess extends PureComponent {
   onClickOk = () => {
-    const { changeBannerStatus } = this.props;
+    const { changeBannerStatus, someFunction } = this.props;
     changeBannerStatus(false);
+    someFunction();
     console.log('ok');
   };
 
@@ -18,7 +19,7 @@ class BannerSuccess extends PureComponent {
           className="button notificiant-banner__button notificiant-banner__button_green"
           onClick={this.onClickOk}
         >
-        Ок
+          Ок
         </button>
       </div>
     );

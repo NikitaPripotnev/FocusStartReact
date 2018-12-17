@@ -2,7 +2,9 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 const ButtonNavMenu = (props) => {
-  const { className, path, title, onClick, dataName } = props;
+  const {
+    className, path, title, onClick, dataName
+  } = props;
 
   return (
     <Route

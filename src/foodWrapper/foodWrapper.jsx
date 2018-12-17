@@ -4,6 +4,7 @@ import SortTable from '../table/sortTable';
 import SearchFood from './searchFood/searchFood';
 import ButtonAddFood from './buttonAddFood/buttonAddFood';
 import createRequest from '../core/create-request';
+import NavMenu from '../navMenu/navMenu';
 
 class FoodWrapper extends PureComponent {
   state = {
@@ -77,6 +78,7 @@ class FoodWrapper extends PureComponent {
     const { DATA_TABLE_FOOD, isLoadingTableFood, TABLE_HEADER } = this.state;
     return (
       <div className="wrapper">
+        <NavMenu />
         <SearchFood changeData={this.changeData} />
         {!isLoadingTableFood && (
           <SortTable headers={TABLE_HEADER} data={DATA_TABLE_FOOD} className="table table-food" />
