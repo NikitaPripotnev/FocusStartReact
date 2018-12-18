@@ -5,6 +5,7 @@ import Home from '../home/home';
 import FoodWrapper from '../foodWrapper/foodWrapper';
 import DietWrapper from '../dietWrapper/dietWrapper';
 import AddFoodWrapper from '../addFoodWrapper/addFoodWrapper';
+import AddDietWrapper from '../addDietWrapper/addDietWrapper';
 import EditFoodWrapper from '../editFoodWrapper/editFoodWrapper';
 
 function Root() {
@@ -16,6 +17,7 @@ function Root() {
         <Route path="/food" component={FoodWrapper} />
         <Route path="/diet" component={DietWrapper} />
         <Route path="/addFood" component={AddFoodWrapper} />
+        <Route path="/addDiet" component={AddDietWrapper} />
         <Route path="/editFood/:id" component={EditFoodWrapper} />
       </div>
     </BrowserRouter>

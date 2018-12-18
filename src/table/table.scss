@@ -1,69 +1,137 @@
-.table-food {
-  &__title {
-    font-size: 16px;
-    color: #79878e;
-    margin-bottom: 5px;
-  }
-
-  &__id {
-    width: 10%;
-  }
-
-  &__name {
-    width: 15%;
-  }
-
-  &__cal {
-    width: 10%;
-  }
-
-  &__prot,
-  &__fat,
-  &__carb {
-    width: 8%;
-  }
-
-  &__info {
-    width: 25%;
-  }
-
-  &__buttons {
-    width: 20%;
-  }
-}
-
-.table td,
-.table th {
-  padding: 10px 10px;
-}
-
-.table th {
-  text-align: left;
-  background-color: var(--color-light-grey);
-  font-weight: bold;
-}
-
-.table tr:nth-child(odd) {
-  background-color: var(--color-light);
-}
-
 .table {
   border-collapse: collapse;
   width: 100%;
-}
 
-.table-diet {
-  &__name {
-    width: 25%;
+  &-food {
+    & td,
+    & th {
+      padding: 10px 10px;
+    }
+
+    & th {
+      text-align: left;
+      color: #fff;
+      background-color: #10702d;
+      font-weight: bold;
+    }
+
+    & td:first-child,
+    & th:first-child {
+      display: none;
+    }
+
+    & td:last-child {
+      text-align: center;
+    }
+
+    & tr:nth-child(odd) {
+      background-color: var(--color-light);
+    }
+
+    & tr:nth-child(even) {
+      background-color: #fff;
+    }
   }
 
-  &__products {
-    width: 30%;
-    padding-left: 30px;
+  &-diet {
+    & td,
+    & th {
+      padding: 10px;
+      text-align: center;
+    }
+
+    & th {
+      color: #fff;
+      background-color: #10702d;
+      font-weight: bold;
+    }
+
+    & th:nth-child(2) {
+      text-align: left;
+    }
+
+    & td:nth-child(2) {
+      padding: 0;
+    }
+
+    & tr:nth-child(odd) {
+      background-color: #fff;
+    }
+
+    & tr:nth-child(even) {
+      background-color: var(--color-light);
+    }
+
+    &__name {
+      width: 25%;
+    }
+
+    &__products {
+      width: 30%;
+      padding-left: 30px;
+    }
+
+    &__info {
+      width: 45%;
+    }
   }
 
-  &__info {
-    width: 45%;
+  &-products {
+    & td,
+    & th {
+      padding: 10px;
+      text-align: left;
+    }
+
+    & th {
+      color: #fff;
+      background-color: var(--color-yellow);
+      font-weight: bold;
+    }
+
+    & tr {
+      background-color: transparent;
+      border-bottom: 1px solid var(--color-light-grey);
+    }
+
+    & thead tr,
+    & tr:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &-food {
+    &__title {
+      font-size: 16px;
+      color: #79878e;
+      margin-bottom: 5px;
+    }
+
+    &__id {
+      width: 10%;
+    }
+
+    &__name {
+      width: 15%;
+    }
+
+    &__cal {
+      width: 10%;
+    }
+
+    &__prot,
+    &__fat,
+    &__carb {
+      width: 8%;
+    }
+
+    &__info {
+      width: 25%;
+    }
+
+    &__buttons {
+      width: 20%;
+    }
   }
 }
 

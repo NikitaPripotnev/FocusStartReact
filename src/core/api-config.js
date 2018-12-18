@@ -3,6 +3,11 @@ export const fetchFood = {
   method: 'GET'
 };
 
+export const fetchDiet = {
+  path: '/api/diet',
+  method: 'GET'
+};
+
 export const fetchFoodItem = {
   path: '/api/food/:name',
   method: 'GET'

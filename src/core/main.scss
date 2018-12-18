@@ -1,13 +1,13 @@
 :root {
   --color-primary: #358ed7;
   --color-secondary: #34495e;
-  --color-light: #f8f4f4;
+  --color-light: #ede4e4;
   --color-red: #f54b5e;
   --color-green: #48d2a0;
   --color-yellow: #f8c61c;
   --color-white: #fff;
   --color-labels: #858585;
-  --color-light-grey: #adafb2;
+  --color-light-grey: #bdbfc2;
   --color-grey: #79878e;
   --opacity-disabled: 0.5;
   --font-size-h1: 64px;
@@ -36,6 +36,12 @@ body {
 
 .wrapper {
   padding: 0 1vw;
+
+  &-overflow {
+    overflow: auto;
+    height: 40vh;
+    margin-bottom: 20px;
+  }
 }
 
 .input {
@@ -46,33 +52,37 @@ body {
   padding: 10px;
   color: var(--color-secondary);
   display: inline-block;
-  width: 100%;
 }
 
 .button {
   border-radius: 3px;
   color: var(--color-white);
+  background-color: var(--color-light-grey);
   border: none;
   font-size: 13px;
   display: inline-block;
   text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
   outline: none;
 
   &_width100 {
     width: 100%;
     height: 50px;
+    line-height: 50px;
     cursor: pointer;
+    margin-bottom: 15px;
   }
 }
 
 @import "../header/header.scss";
 @import "../navMenu/navMenu.scss";
-@import "../home/home.scss";
-@import "../addFoodWrapper/addFoodWrapper.scss";
 @import "../table/table.scss";
 @import "../table/button/button.scss";
+@import "../home/home.scss";
 @import "../foodWrapper/foodWrapper.scss";
 @import "../foodWrapper/searchFood/searchFood.scss";
-@import "../foodWrapper/buttonAddFood/buttonAddFood.scss";
 @import "../notificiantBanners/notificiantBanners.scss";
+@import "../addFoodWrapper/addFoodWrapper.scss";
+@import "../addDietWrapper/addDietWrapper.scss";

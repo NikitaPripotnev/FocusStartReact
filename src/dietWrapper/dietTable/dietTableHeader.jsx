@@ -5,15 +5,13 @@ const DietTableHeader = (props) => {
 
   return (
     <thead>
-      {headers.map((item, id) => (
-        <tr key={`diet-tr-${id}`}>
-          {item.map((element, index) => (
-            <th key={index} className="" colSpan={element.colspan} rowSpan={element.rowspan}>
-              {element.label}
-            </th>
-          ))}
-        </tr>
-      ))}
+      <tr key="dietHeaderKey">
+        {headers.map((element, index) => (
+          <th key={index} className="">
+            {element.label}
+          </th>
+        ))}
+      </tr>
     </thead>
   );
 };

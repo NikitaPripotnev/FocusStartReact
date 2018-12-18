@@ -67,12 +67,12 @@ class SortTable extends PureComponent {
 
   render() {
     const { headers, data } = this.state;
-    const { className } = this.props;
+    const { className, buttonsGroup, someFunction } = this.props;
     console.log(className, 'in render table');
     return (
       <table className={className}>
         <SortTableHeader headers={headers} onClick={this.sortTableFunc} />
-        <SortTableBody data={data} changeDataByDelete={this.changeDataByDelete} />
+        <SortTableBody data={data} changeDataByDelete={this.changeDataByDelete} buttonsGroup={buttonsGroup} someFunction={someFunction} />
       </table>
     );
   }

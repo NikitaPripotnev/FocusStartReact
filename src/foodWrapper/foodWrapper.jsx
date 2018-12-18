@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { fetchFood, fetchFoodItem } from '../core/api-config';
 import SortTable from '../table/sortTable';
 import SearchFood from './searchFood/searchFood';
-import ButtonAddFood from './buttonAddFood/buttonAddFood';
+import ButtonAddScreen from '../buttonAddScreen/buttonAddScreen';
 import createRequest from '../core/create-request';
 import NavMenu from '../navMenu/navMenu';
 
@@ -58,7 +58,7 @@ class FoodWrapper extends PureComponent {
   componentDidMount() {
     createRequest(fetchFood).then(({ status, data }) => {
       if (status === 'OK') {
-        this.setState({ DATA_TABLE_FOOD: data });
+        this.setState({ DATA_TABLE_FOOD: data, isLoadingTableFood: true });
       }
     });
   }
@@ -80,10 +80,10 @@ class FoodWrapper extends PureComponent {
       <div className="wrapper">
         <NavMenu />
         <SearchFood changeData={this.changeData} />
-        {!isLoadingTableFood && (
-          <SortTable headers={TABLE_HEADER} data={DATA_TABLE_FOOD} className="table table-food" />
+        {isLoadingTableFood && (
+          <SortTable headers={TABLE_HEADER} data={DATA_TABLE_FOOD} className="table table-food" buttonsGroup="trrrrruee" />
         )}
-        <ButtonAddFood />
+        <ButtonAddScreen path="/addFood" className="button button_width100 food-wrapper__button" title="Добавить новый продукт" />
       </div>
     );
   }

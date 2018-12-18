@@ -1,0 +1,47 @@
+.add-diet-form {
+  &__table-wrapper {
+    border: 1px solid var(--color-light-grey);
+  }
+
+  &__table-added-products {
+    width: 50%;
+    font-size: 14px;
+
+    & td {
+      padding: 20px 0;
+    }
+  }
+
+  &__product-item {
+    width: 100%;
+    border-bottom: 1px solid var(--color-light-grey);
+
+    &__td {
+      &-count {
+        width: 5%;
+      }
+
+      &-name {
+        width: 15%;
+      }
+
+      &-grams {
+        width: 65%;
+      }
+    }
+
+    &__input {
+      margin-left: 20px;
+      min-width: 60px;
+    }
+
+    &__button {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: var(--color-red);
+      font-weight: bold;
+      color: #000;
+    }
+  }
+}

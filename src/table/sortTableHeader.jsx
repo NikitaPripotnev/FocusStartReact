@@ -6,7 +6,7 @@ const SortTableHeader = (props) => {
 
   return (
     <thead>
-      <tr>
+      <tr key="sortHeaderKey">
         {headers.map((element, index) => (
           <th
             key={index}
