@@ -21,6 +21,10 @@ class DietTable extends PureComponent {
         className: ''
       },
       {
+        label: 'Калории',
+        className: ''
+      },
+      {
         label: 'Б',
         className: ''
       },
@@ -30,10 +34,6 @@ class DietTable extends PureComponent {
       },
       {
         label: 'У',
-        className: ''
-      },
-      {
-        label: 'Калории',
         className: ''
       }
     ]
@@ -65,8 +65,7 @@ class DietTable extends PureComponent {
   };
 
   convertDataToTable = (data, ID_DIET, FOOD) => {
-    const dataForTable = this.objToArr(data);
-    dataForTable.forEach((element) => {
+    const dataForTable = this.objToArr(data).map((element) => {
       ID_DIET.push(element[0]);
       const arrayFood = element[2].map((item) => {
         let newItem = Object.values(FOOD.find(FoodItem => FoodItem.id === item.id));
@@ -87,10 +86,22 @@ class DietTable extends PureComponent {
       });
       element[2] = arrayFood;
       element.splice(0, 1);
-      return element;
+      return element.concat(this.sumParams(arrayFood, 1, 4));
     });
+    console.log(dataForTable);
     return dataForTable;
   };
+
+  sumParams = (arrayData, number, length) => {
+    const arraySum = [];
+    console.log(arrayData, 'arrayData');
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    for (let i = number; i <= length; i++) {
+      arraySum.push(arrayData.map(elem => elem[i]).reduce(reducer));
+    }
+    console.log(arraySum, 'arraySum');
+    return arraySum;
+  }
 
   render() {
     const { HEADERS_TABLE_DIET, DATA_TABLE_DIET } = this.state;

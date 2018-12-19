@@ -68,16 +68,23 @@ class AddDietWrapper extends PureComponent {
   }
 
   clickAdd = (id) => {
-    const { FOOD } = this.state;
-    const product = FOOD.find(FoodItem => FoodItem.id === id);
-    const ref = createRef();
-    const productForState = {
-      id,
-      other: [product.name, product.cal, product.prot, product.fat, product.carb],
-      grams: 0,
-      ref
-    };
-    this.setState(state => ({ addedProduct: state.addedProduct.concat(productForState) }));
+    const { FOOD, addedProduct } = this.state;
+    if (!addedProduct.some(elem => elem.id === id)) {
+      const product = FOOD.find(FoodItem => FoodItem.id === id);
+      const ref = createRef();
+      const productForState = {
+        id,
+        other: [product.name, product.cal, product.prot, product.fat, product.carb],
+        grams: 0,
+        ref
+      };
+      this.setState(state => ({ addedProduct: state.addedProduct.concat(productForState) }));
+    }
+  }
+
+  clickDelete = (id) => {
+    const { addedProduct } = this.state;
+    this.setState({ addedProduct: addedProduct.filter(FoodItem => FoodItem.id !== id) });
   }
 
   onSubmit = (event) => {
@@ -124,7 +131,9 @@ class AddDietWrapper extends PureComponent {
                     count={index + 1}
                     data={element.other}
                     ref={element.ref}
+                    id={element.id}
                     grams={element.grams}
+                    clickDelete={this.clickDelete}
                   />
                 ))}
               </tbody>

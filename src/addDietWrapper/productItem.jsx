@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 
 class ProductItem extends PureComponent {
-  onClick = () => {};
+  onClick = () => {
+    const { id, clickDelete } = this.props;
+    clickDelete(id);
+  };
 
   render() {
     const {

@@ -76,11 +76,12 @@
     }
   }
 
-  &-products {
+  & &-products {
     & td,
     & th {
       padding: 10px;
       text-align: left;
+      background-color: transparent;
     }
 
     & th {
