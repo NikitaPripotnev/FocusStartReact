@@ -53,6 +53,9 @@ class AddDietWrapper extends PureComponent {
         sort: 'none',
         class: 'table-food__buttons'
       }
+    ],
+    HeaderAddedProduct: [
+      '', 'Наименование', 'Калории', 'Б', 'Ж', 'У', 'Граммы', ''
     ]
   };
 
@@ -66,11 +69,11 @@ class AddDietWrapper extends PureComponent {
 
   clickAdd = (id) => {
     const { FOOD } = this.state;
-    const productName = FOOD.find(FoodItem => FoodItem.id === id).name;
+    const product = FOOD.find(FoodItem => FoodItem.id === id);
     const ref = createRef();
     const productForState = {
       id,
-      name: productName,
+      other: [product.name, product.cal, product.prot, product.fat, product.carb],
       grams: 0,
       ref
     };
@@ -86,6 +89,7 @@ class AddDietWrapper extends PureComponent {
       FOOD,
       isLoadingTableFood,
       addedProduct,
+      HeaderAddedProduct,
       TABLE_HEADER
     } = this.state;
     return (
@@ -107,13 +111,25 @@ class AddDietWrapper extends PureComponent {
               <SortTable headers={TABLE_HEADER} data={FOOD} className="table table-food" buttonsGroup={false} someFunction={this.clickAdd} />
             )}
           </div>
-          <table className="table add-diet-form__table-added-products">
-            <tbody>
-              {addedProduct.map((element, index) => (
-                <ProductItem count={index + 1} name={element.name} ref={element.ref} grams={element.grams} />
-              ))}
-            </tbody>
-          </table>
+          {addedProduct[0] && (
+            <table className="table add-diet-form__table-added-products">
+              <thead>
+                <tr key="addedHead">
+                  {HeaderAddedProduct.map(item => <th>{item}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {addedProduct.map((element, index) => (
+                  <ProductItem
+                    count={index + 1}
+                    data={element.other}
+                    ref={element.ref}
+                    grams={element.grams}
+                  />
+                ))}
+              </tbody>
+            </table>)
+          }
           <button type="submit" className="button button_width100 add-form__button">
             Добавить
           </button>

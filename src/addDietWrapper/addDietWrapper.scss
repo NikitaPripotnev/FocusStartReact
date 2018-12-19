@@ -4,11 +4,13 @@
   }
 
   &__table-added-products {
-    width: 50%;
+    width: 70%;
     font-size: 14px;
+    margin-bottom: 15px;
 
-    & td {
-      padding: 20px 0;
+    & td,
+    & th {
+      padding: 20px 10px;
     }
   }
 
@@ -22,26 +24,30 @@
       }
 
       &-name {
-        width: 15%;
+        // width: 15%;
       }
 
       &-grams {
-        width: 65%;
+        width: 50%;
       }
     }
 
     &__input {
-      margin-left: 20px;
       min-width: 60px;
+      width: 100%;
     }
 
     &__button {
       width: 25px;
       height: 25px;
       border-radius: 50%;
-      background-color: var(--color-red);
+      background-color: var(--color-light-grey);
       font-weight: bold;
       color: #000;
+
+      &:hover {
+        background-color: var(--color-red);
+      }
     }
   }
 }

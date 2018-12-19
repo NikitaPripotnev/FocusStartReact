@@ -5,18 +5,15 @@ class ProductItem extends PureComponent {
 
   render() {
     const {
-      name, ref, grams, count
+      data, ref, grams, count
     } = this.props;
     return (
-      <tr key={name} className="add-diet-form__product-item">
-        <td key={0} className="add-diet-form__product-item__td-count">
+      <tr key={data[0]} className="add-diet-form__product-item">
+        <td key="count" className="add-diet-form__product-item__td-count">
           {`${count}.`}
         </td>
-        <td key={1} className="add-diet-form__product-item__td-name">
-          {name}
-        </td>
-        <td key={2} className="add-diet-form__product-item__td-grams">
-          Граммы:
+        {data.map(element => <td key={element}>{element}</td>)}
+        <td key="grams" className="add-diet-form__product-item__td-grams">
           <input
             type="text"
             value={grams}
@@ -24,7 +21,7 @@ class ProductItem extends PureComponent {
             ref={ref}
           />
         </td>
-        <td key={3} className="add-diet-form__product-item__td-buttons">
+        <td key="button" className="add-diet-form__product-item__td-buttons">
           <button
             type="button"
             className="button add-diet-form__product-item__button"
