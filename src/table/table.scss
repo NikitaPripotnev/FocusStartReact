@@ -31,6 +31,38 @@
     & tr:nth-child(even) {
       background-color: #fff;
     }
+
+    &__title {
+      font-size: 16px;
+      color: #79878e;
+      margin-bottom: 5px;
+    }
+
+    &__id {
+      width: 10%;
+    }
+
+    &__name {
+      width: 15%;
+    }
+
+    &__cal {
+      width: 10%;
+    }
+
+    &__prot,
+    &__fat,
+    &__carb {
+      width: 10%;
+    }
+
+    &__info {
+      width: 25%;
+    }
+
+    &__buttons {
+      width: 15%;
+    }
   }
 
   &-diet {
@@ -46,12 +78,18 @@
       font-weight: bold;
     }
 
-    & th:nth-child(2) {
+    & th:nth-child(3) {
       text-align: left;
     }
 
-    & td:nth-child(2) {
+    & td:nth-child(3) {
       padding: 0;
+    }
+
+    & td:last-child,
+    & th:last-child {
+      text-align: center;
+      width: 15%;
     }
 
     & tr:nth-child(odd) {
@@ -62,8 +100,8 @@
       background-color: var(--color-light);
     }
 
-    &__name {
-      width: 25%;
+    &__id {
+      display: none;
     }
 
     &__products {
@@ -100,46 +138,6 @@
       border-bottom: none;
     }
   }
-
-  &-food {
-    &__title {
-      font-size: 16px;
-      color: #79878e;
-      margin-bottom: 5px;
-    }
-
-    &__id {
-      width: 10%;
-    }
-
-    &__name {
-      width: 15%;
-    }
-
-    &__cal {
-      width: 10%;
-    }
-
-    &__prot,
-    &__fat,
-    &__carb {
-      width: 8%;
-    }
-
-    &__info {
-      width: 25%;
-    }
-
-    &__buttons {
-      width: 20%;
-    }
-  }
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: block;
 }
 
 .sort-th {

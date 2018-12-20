@@ -4,7 +4,9 @@ class BannerSuccess extends PureComponent {
   onClickOk = () => {
     const { changeBannerStatus, someFunction } = this.props;
     changeBannerStatus(false);
-    someFunction();
+    if (someFunction) {
+      someFunction();
+    }
     console.log('ok');
   };
 

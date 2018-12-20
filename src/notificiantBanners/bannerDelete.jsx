@@ -8,12 +8,11 @@ class BannerDelete extends PureComponent {
     } = this.props;
     createRequest(request, { id }, null).then(({ status }) => {
       if (status === 'OK') {
-        console.log('DELETE status - OK');
         changeBannerStatus(false);
         console.log('yes');
         changeDataByDelete(id);
       } else {
-        console.log('DELETE status - BAD');
+        console.error('DELETE status - BAD');
       }
     });
   };
@@ -21,7 +20,6 @@ class BannerDelete extends PureComponent {
   onClickNo = () => {
     const { changeBannerStatus } = this.props;
     changeBannerStatus(false);
-    console.log('no');
   };
 
   render() {

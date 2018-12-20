@@ -7,6 +7,7 @@ import DietWrapper from '../dietWrapper/dietWrapper';
 import AddFoodWrapper from '../addFoodWrapper/addFoodWrapper';
 import AddDietWrapper from '../addDietWrapper/addDietWrapper';
 import EditFoodWrapper from '../editFoodWrapper/editFoodWrapper';
+import EditDietWrapper from '../editDietWrapper/editDietWrapper';
 
 function Root() {
   return (
@@ -15,10 +16,11 @@ function Root() {
         <Header />
         <Route exact path="/" component={Home} />
         <Route path="/food" component={FoodWrapper} />
-        <Route path="/diet" component={DietWrapper} />
+        <Route path="/diets/:BMR?" component={DietWrapper} />
         <Route path="/addFood" component={AddFoodWrapper} />
         <Route path="/addDiet" component={AddDietWrapper} />
         <Route path="/editFood/:id" component={EditFoodWrapper} />
+        <Route path="/editDiet/:id" component={EditDietWrapper} />
       </div>
     </BrowserRouter>
   );

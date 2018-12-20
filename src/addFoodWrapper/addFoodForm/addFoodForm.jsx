@@ -53,7 +53,7 @@ class AddFoodForm extends PureComponent {
       createFood,
       null,
       this.fields.map(item => ({ [item.name]: item.ref.current.value })).reduce(reducer)
-    ).then(({ status, data }) => {
+    ).then(({ status }) => {
       if (status === 'OK') {
         this.changeBannerStatus(true);
         this.fields.forEach((fieldItem) => {
@@ -61,10 +61,9 @@ class AddFoodForm extends PureComponent {
         });
         setTimeout(() => {
           this.changeBannerStatus(false);
-        }, 4000);
-        console.log(data, 'POST status - OK');
+        }, 3000);
       } else {
-        console.log('status - BAD');
+        console.error('status - BAD');
       }
     });
   };
@@ -73,8 +72,8 @@ class AddFoodForm extends PureComponent {
     const { banner } = this.state;
     return (
       <div>
-        <form className="add-food" onSubmit={this.onSubmit}>
-          {this.fields.map(item => (
+        <form className="add-form" onSubmit={this.onSubmit}>
+          {this.fields.map((item, index) => (
             <label htmlFor={`food-item-${item.name}`}>
               {item.label}
               <input
@@ -82,6 +81,12 @@ class AddFoodForm extends PureComponent {
                 id={`food-item-${item.name}`}
                 className={`input add-form__input input_${item.name}`}
                 name="text"
+                required
+                pattern={`${
+                  index === 1 || index === 2 || index === 3 || index === 4
+                    ? '/[0-9]{,5}/'
+                    : '^[A-Za-zА-Яа-яЁё]+$'
+                }`}
                 ref={item.ref}
               />
             </label>

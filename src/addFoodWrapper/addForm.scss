@@ -1,7 +1,17 @@
 .add-form {
+  border: 2px solid var(--color-green);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+
   &__input {
     margin-bottom: 15px;
     width: 100%;
+    outline: none;
+
+    &:focus {
+      border-color: var(--color-green);
+    }
   }
 
   &__button {

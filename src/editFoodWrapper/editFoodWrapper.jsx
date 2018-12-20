@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import EditFood from './editFood/editFood';
+import EditFoodForm from './editFood/editFoodForm';
 
 class EditFoodWrapper extends PureComponent {
   render() {
@@ -8,7 +8,7 @@ class EditFoodWrapper extends PureComponent {
     const { history } = this.props;
     return (
       <div className="wrapper">
-        <EditFood id={this.props.match.params.id} history={history} />
+        <EditFoodForm id={this.props.match.params.id} history={history} />
       </div>
     );
   }

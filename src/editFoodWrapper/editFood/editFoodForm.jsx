@@ -39,22 +39,15 @@ class EditFood extends PureComponent {
   }
 
   state = {
-    banner: false,
-    id: '1'
+    banner: false
   };
 
-  componentWillMount() {
-    const { id } = this.props;
-    this.setState({ id });
-  }
-
   componentDidMount() {
-    const { id } = this.state;
+    const { id } = this.props;
     createRequest(fetchFoodId, { id }, null).then(({ status, data }) => {
       if (status === 'OK') {
         const dataArray = Object.values(data);
         dataArray.splice(0, 1);
-        console.log(data, dataArray, 'data and dataArray');
         this.fields.forEach((fieldItem, index) => {
           fieldItem.ref.current.value = dataArray[index];
         });
@@ -70,7 +63,6 @@ class EditFood extends PureComponent {
 
   onSubmit = (event) => {
     const { id } = this.state;
-    const { history } = this.props;
 
     event.preventDefault();
     const reducer = (accumulator, currentValue) => Object.assign(accumulator, currentValue);
@@ -96,22 +88,22 @@ class EditFood extends PureComponent {
   render() {
     const { banner } = this.state;
     return (
-      <div>
-        <form className="add-food" onSubmit={this.onSubmit}>
+      <div className="edit-food-wrapper">
+        <form className="edit-form" onSubmit={this.onSubmit}>
           {this.fields.map(item => (
             <label htmlFor={`food-item-${item.name}`}>
               {item.label}
               <input
                 type="text"
                 id={`food-item-${item.name}`}
-                className={`input add-form__input input_${item.name}`}
+                className={`input edit-form__input input_${item.name}`}
                 name="text"
                 ref={item.ref}
               />
             </label>
           ))}
 
-          <button type="submit" className="button button_width100 add-form__button">
+          <button type="submit" className="button button_width100 edit-form__button">
             Сохранить изменения
           </button>
         </form>

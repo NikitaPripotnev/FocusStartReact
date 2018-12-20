@@ -6,7 +6,7 @@ class SearchFood extends PureComponent {
   textRef = createRef();
 
   state = {
-    banner:false
+    banner: false
   }
 
   changeBannerStatus = (flag) => {

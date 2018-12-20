@@ -1,13 +1,14 @@
 import React, { PureComponent, createRef } from 'react';
 import SortTable from '../table/sortTable';
-import ButtonAddScreen from '../buttonAddScreen/buttonAddScreen';
-import ProductItem from './productItem';
+import ProductItem from '../addDietWrapper/productItem';
 import BannerSuccess from '../notificiantBanners/bannerSuccess';
 import createRequest from '../core/create-request';
-import { fetchFood, createDiet } from '../core/api-config';
+import { fetchFood, patchDiet, fetchDietId } from '../core/api-config';
 
-class AddDietWrapper extends PureComponent {
+class EditDietWrapper extends PureComponent {
   nameRef = createRef();
+
+  grams = [];
 
   state = {
     FOOD: [],
@@ -56,13 +57,26 @@ class AddDietWrapper extends PureComponent {
         class: 'table-food__buttons'
       }
     ],
-    HeaderaddedProducts: ['', 'Наименование', 'Калории', 'Б', 'Ж', 'У', 'Граммы', '']
+    HeaderAddedProducts: ['', 'Наименование', 'Калории', 'Б', 'Ж', 'У', 'Граммы', '']
   };
 
   componentDidMount() {
     createRequest(fetchFood).then(({ status, data }) => {
       if (status === 'OK') {
         this.setState({ FOOD: data, isLoadingTableFood: true });
+
+        const id = this.props.match.params.id;
+        createRequest(fetchDietId, { id }, null).then(({ status, data }) => {
+          if (status === 'OK') {
+            const { FOOD } = this.state;
+            this.nameRef.current.value = data.name;
+            this.setState({
+              addedProducts: data.food.map(product => this.collectProduct(FOOD, product.id, product.grams))
+            });
+          } else {
+            console.log('edit, status - BAD');
+          }
+        });
       }
     });
   }
@@ -100,17 +114,14 @@ class AddDietWrapper extends PureComponent {
   onSubmit = (event) => {
     event.preventDefault();
     const { addedProducts } = this.state;
+    const id = this.props.match.params.id;
     const newDiet = Object.assign(
       { name: this.nameRef.current.value },
       { food: addedProducts.map(product => ({ id: product.id, grams: product.ref.current.value })) }
     );
-    createRequest(createDiet, null, newDiet).then(({ status, data }) => {
+    createRequest(patchDiet, { id }, newDiet).then(({ status, data }) => {
       if (status === 'OK') {
         this.changeBannerStatus(true);
-        this.setState({ addedProducts: [] });
-        setTimeout(() => {
-          this.changeBannerStatus(false);
-        }, 3000);
         console.log(data, 'POST status - OK');
       } else {
         console.log('status - BAD');
@@ -118,25 +129,30 @@ class AddDietWrapper extends PureComponent {
     });
   };
 
+  goBack = () => {
+    const { history } = this.props;
+    history.push('/diets');
+  };
+
   render() {
     const {
       FOOD,
       isLoadingTableFood,
       addedProducts,
-      HeaderaddedProducts,
+      HeaderAddedProducts,
       TABLE_HEADERS,
       banner
     } = this.state;
     console.log(this.state, 'in render');
     return (
       <div className="wrapper">
-        <form name="add-diet" className="add-diet-form" onSubmit={this.onSubmit}>
+        <form name="add-diet" className="edit-diet-form" onSubmit={this.onSubmit}>
           <label htmlFor="name-diet">
             Название:
             <input
               type="text"
               id="name-diet"
-              className="input add-form__input"
+              className="input edit-form__input"
               name="name-diet"
               ref={this.nameRef}
               required
@@ -158,7 +174,7 @@ class AddDietWrapper extends PureComponent {
             <table className="table add-diet-form__table-added-products">
               <thead>
                 <tr key="addedHead">
-                  {HeaderaddedProducts.map(item => (
+                  {HeaderAddedProducts.map(item => (
                     <th>{item}</th>
                   ))}
                 </tr>
@@ -178,20 +194,15 @@ class AddDietWrapper extends PureComponent {
               </tbody>
             </table>
           )}
-          <button type="submit" className="button button_width100 add-form__button">
-            Добавить
+          <button type="submit" className="button button_width100 edit-form__button">
+            Сохранить изменения
           </button>
         </form>
-
-        <ButtonAddScreen
-          path="/diets"
-          className="button button_width100 add-food-wrapper__button_back"
-          title="Вернуться к списку диет"
-        />
         {banner && (
           <BannerSuccess
-            message="Диета успешно добавлена"
+            message="Изменения успешно сохранены"
             changeBannerStatus={this.changeBannerStatus}
+            someFunction={this.goBack}
           />
         )}
       </div>
@@ -199,4 +210,4 @@ class AddDietWrapper extends PureComponent {
   }
 }
 
-export default AddDietWrapper;
+export default EditDietWrapper;

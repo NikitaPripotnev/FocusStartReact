@@ -11,7 +11,7 @@ class SortTable extends PureComponent {
     headers: []
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { data, headers } = this.props;
     this.setState({ data: this.objToArr(data), headers });
   }
@@ -28,12 +28,6 @@ class SortTable extends PureComponent {
     }
     return ([Object.values(data)]);
   };
-
-  changeDataByDelete = (id) => {
-    this.setState(state => ({
-      data: state.data.filter(element => element[0] !== id)
-    }));
-  }
 
   sortTableFunc = (id, sortMethod) => {
     const { data, headers } = this.state;
@@ -67,12 +61,17 @@ class SortTable extends PureComponent {
 
   render() {
     const { headers, data } = this.state;
-    const { className, buttonsGroup, someFunction } = this.props;
+    const { className, buttonsGroup, someFunction, changeDataByDelete } = this.props;
     console.log(className, 'in render table');
     return (
       <table className={className}>
         <SortTableHeader headers={headers} onClick={this.sortTableFunc} />
-        <SortTableBody data={data} changeDataByDelete={this.changeDataByDelete} buttonsGroup={buttonsGroup} someFunction={someFunction} />
+        <SortTableBody
+          data={data}
+          changeDataByDelete={changeDataByDelete}
+          buttonsGroup={buttonsGroup}
+          someFunction={someFunction}
+        />
       </table>
     );
   }

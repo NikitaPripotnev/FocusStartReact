@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 class ButtonEdit extends PureComponent {
   render() {
-    const { title, id } = this.props;
+    const { title, path } = this.props;
     return (
       <Route
         render={({ history }) => (
@@ -11,7 +11,7 @@ class ButtonEdit extends PureComponent {
             className="button button_icon button_icon_edit"
             type="button"
             onClick={() => {
-              history.push(`/editFood/${id}`);
+              history.push(path);
             }}
           >
             {title}

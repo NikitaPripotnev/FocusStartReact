@@ -35,12 +35,20 @@ body {
 }
 
 .wrapper {
-  padding: 0 1vw;
+  padding: 1vh 1vw;
 
   &-overflow {
     overflow: auto;
     height: 40vh;
     margin-bottom: 20px;
+
+    &_food {
+      height: 47vh;
+    }
+
+    &_diet {
+      height: 53vh;
+    }
   }
 }
 
@@ -72,8 +80,13 @@ body {
     height: 50px;
     line-height: 50px;
     cursor: pointer;
-    margin-bottom: 15px;
   }
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: block;
 }
 
 @import "../header/header.scss";
@@ -81,8 +94,11 @@ body {
 @import "../table/table.scss";
 @import "../table/button/button.scss";
 @import "../home/home.scss";
+@import "../home/chooseDietForm";
 @import "../foodWrapper/foodWrapper.scss";
 @import "../foodWrapper/searchFood/searchFood.scss";
 @import "../notificiantBanners/notificiantBanners.scss";
 @import "../addFoodWrapper/addFoodWrapper.scss";
+@import "../addFoodWrapper/addForm.scss";
 @import "../addDietWrapper/addDietWrapper.scss";
+@import "../editFoodWrapper/editForm.scss";

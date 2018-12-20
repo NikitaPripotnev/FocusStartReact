@@ -54,7 +54,6 @@ class FoodWrapper extends PureComponent {
     ]
   };
 
-
   componentDidMount() {
     createRequest(fetchFood).then(({ status, data }) => {
       if (status === 'OK') {
@@ -72,18 +71,38 @@ class FoodWrapper extends PureComponent {
         console.log('changeData, status - BAD');
       }
     });
-  }
+  };
+
+  changeDataByDelete = (id) => {
+    this.setState(state => ({
+      DATA_TABLE_FOOD: state.DATA_TABLE_FOOD.filter(element => element.id !== id)
+    }));
+  };
 
   render() {
     const { DATA_TABLE_FOOD, isLoadingTableFood, TABLE_HEADER } = this.state;
     return (
-      <div className="wrapper">
+      <div>
         <NavMenu />
-        <SearchFood changeData={this.changeData} />
-        {isLoadingTableFood && (
-          <SortTable headers={TABLE_HEADER} data={DATA_TABLE_FOOD} className="table table-food" buttonsGroup="trrrrruee" />
-        )}
-        <ButtonAddScreen path="/addFood" className="button button_width100 food-wrapper__button" title="Добавить новый продукт" />
+        <div className="wrapper">
+          <SearchFood changeData={this.changeData} />
+          {isLoadingTableFood && (
+            <div className="wrapper-overflow wrapper-overflow_food">
+              <SortTable
+                headers={TABLE_HEADER}
+                data={DATA_TABLE_FOOD}
+                className="table table-food"
+                buttonsGroup="trrrrruee"
+                changeDataByDelete={this.changeDataByDelete}
+              />
+            </div>
+          )}
+        </div>
+        <ButtonAddScreen
+          path="/addFood"
+          className="button button_width100 food-wrapper__button"
+          title="Добавить новый продукт"
+        />
       </div>
     );
   }

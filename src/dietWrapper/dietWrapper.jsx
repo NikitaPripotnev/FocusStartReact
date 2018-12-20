@@ -5,15 +5,16 @@ import DietTable from './dietTable/dietTable';
 import ButtonAddScreen from '../buttonAddScreen/buttonAddScreen';
 
 class DietWrapper extends PureComponent {
-  onClick = () => {
-    console.log('check');
-  };
+  onClick = () => {};
 
   render() {
+    const { BMR } = this.props.match.params;
     return (
-      <div className="wrapper">
+      <div>
         <NavMenu />
-        <DietTable />
+        <div className="wrapper">
+          <DietTable BMR={BMR} />
+        </div>
         <ButtonAddScreen
           path="/addDiet"
           className="button button_width100 food-wrapper__button"

@@ -7,7 +7,7 @@ const DietTableHeader = (props) => {
     <thead>
       <tr key="dietHeaderKey">
         {headers.map((element, index) => (
-          <th key={index} className="">
+          <th key={index} className={`table-diet__${element.className}`}>
             {element.label}
           </th>
         ))}

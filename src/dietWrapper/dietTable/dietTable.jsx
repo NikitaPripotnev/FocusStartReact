@@ -8,10 +8,12 @@ import DietTableBody from './dietTableBody';
 class DietTable extends PureComponent {
   state = {
     DATA_TABLE_DIET: [],
-    ID_DIET: [],
-    ID_FOOD: [],
     FOOD: [],
     HEADERS_TABLE_DIET: [
+      {
+        label: 'id',
+        className: 'id'
+      },
       {
         label: 'Название',
         className: ''
@@ -35,6 +37,10 @@ class DietTable extends PureComponent {
       {
         label: 'У',
         className: ''
+      },
+      {
+        label: '',
+        className: ''
       }
     ]
   };
@@ -46,10 +52,16 @@ class DietTable extends PureComponent {
 
         createRequest(fetchDiet).then(({ status, data }) => {
           if (status === 'OK') {
-            const { ID_DIET, FOOD } = this.state;
+            const { FOOD } = this.state;
+            const { BMR } = this.props;
+            let fullData = this.convertDataToTable(data, FOOD);
+            if (BMR) {
+              fullData = fullData.filter(
+                element => element[3] >= BMR - 300 && element[3] <= BMR + 300
+              );
+            }
             this.setState({
-              DATA_TABLE_DIET: this.convertDataToTable(data, ID_DIET, FOOD),
-              ID_DIET
+              DATA_TABLE_DIET: fullData
             });
           }
         });
@@ -64,14 +76,13 @@ class DietTable extends PureComponent {
     return [Object.values(data)];
   };
 
-  convertDataToTable = (data, ID_DIET, FOOD) => {
+  convertDataToTable = (data, FOOD) => {
     const dataForTable = this.objToArr(data).map((element) => {
-      ID_DIET.push(element[0]);
       const arrayFood = element[2].map((item) => {
         let newItem = Object.values(FOOD.find(FoodItem => FoodItem.id === item.id));
         newItem = newItem.map((foodParam, number) => {
           if (number !== 0 && number !== 1 && number !== 6) {
-            return (+foodParam * +item.grams) / 100;
+            return (foodParam * item.grams) / 100;
           }
           return foodParam;
         });
@@ -85,31 +96,39 @@ class DietTable extends PureComponent {
         return item;
       });
       element[2] = arrayFood;
-      element.splice(0, 1);
       return element.concat(this.sumParams(arrayFood, 1, 4));
     });
-    console.log(dataForTable);
     return dataForTable;
   };
 
   sumParams = (arrayData, number, length) => {
     const arraySum = [];
-    console.log(arrayData, 'arrayData');
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     for (let i = number; i <= length; i++) {
       arraySum.push(arrayData.map(elem => elem[i]).reduce(reducer));
     }
-    console.log(arraySum, 'arraySum');
     return arraySum;
-  }
+  };
+
+  changeDataByDelete = (id) => {
+    this.setState(state => ({
+      DATA_TABLE_DIET: state.DATA_TABLE_DIET.filter(element => element[0] !== id)
+    }));
+  };
 
   render() {
     const { HEADERS_TABLE_DIET, DATA_TABLE_DIET } = this.state;
     return (
-      <table className="table table-diet">
-        <DietTableHeader headers={HEADERS_TABLE_DIET} />
-        <DietTableBody data={DATA_TABLE_DIET} />
-      </table>
+      <div className="wrapper-overflow wrapper-overflow_diet">
+        <table className="table table-diet">
+          <DietTableHeader headers={HEADERS_TABLE_DIET} />
+          <DietTableBody
+            data={DATA_TABLE_DIET}
+            changeDataByDelete={this.changeDataByDelete}
+            headers={HEADERS_TABLE_DIET}
+          />
+        </table>
+      </div>
     );
   }
 }

@@ -4,7 +4,7 @@ export const fetchFood = {
 };
 
 export const fetchDiet = {
-  path: '/api/diet',
+  path: '/api/diets',
   method: 'GET'
 };
 
@@ -18,8 +18,18 @@ export const fetchFoodId = {
   method: 'GET'
 };
 
+export const fetchDietId = {
+  path: '/api/diets/:id',
+  method: 'GET'
+};
+
 export const createFood = {
   path: '/api/food',
+  method: 'POST'
+};
+
+export const createDiet = {
+  path: '/api/diets',
   method: 'POST'
 };
 
@@ -28,7 +38,17 @@ export const patchFood = {
   method: 'PATCH'
 };
 
+export const patchDiet = {
+  path: '/api/diets/:id',
+  method: 'PATCH'
+};
+
 export const deleteFoodItem = {
   path: '/api/food/:id',
+  method: 'DELETE'
+};
+
+export const deleteDiet = {
+  path: '/api/diets/:id',
   method: 'DELETE'
 };
