@@ -78,10 +78,6 @@
       font-weight: bold;
     }
 
-    & th:nth-child(3) {
-      text-align: left;
-    }
-
     & td:nth-child(3) {
       padding: 0;
     }
@@ -105,8 +101,7 @@
     }
 
     &__products {
-      width: 30%;
-      padding-left: 30px;
+      text-align: left;
     }
 
     &__info {
@@ -125,6 +120,7 @@
     & th {
       color: #fff;
       background-color: var(--color-yellow);
+      text-align: left;
       font-weight: bold;
     }
 

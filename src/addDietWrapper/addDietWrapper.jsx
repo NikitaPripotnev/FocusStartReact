@@ -102,7 +102,7 @@ class AddDietWrapper extends PureComponent {
     const { addedProducts } = this.state;
     const newDiet = Object.assign(
       { name: this.nameRef.current.value },
-      { food: addedProducts.map(product => ({ id: product.id, grams: product.ref.current.value })) }
+      { food: addedProducts.map(product => ({ id: product.id, grams: +product.ref.current.value })) }
     );
     createRequest(createDiet, null, newDiet).then(({ status, data }) => {
       if (status === 'OK') {

@@ -102,3 +102,29 @@ body {
 @import "../addFoodWrapper/addForm.scss";
 @import "../addDietWrapper/addDietWrapper.scss";
 @import "../editFoodWrapper/editForm.scss";
+
+@media screen and (max-width: 680px) {
+  .notificiant-banner__svg {
+    display: none;
+  }
+
+  .button {
+    font-size: 12px;
+
+    &_icon {
+      font-size: 0;
+      padding-top: 20px;
+    }
+  }
+
+  .table {
+    font-size: 12px;
+
+    &-food {
+      & td:nth-child(7),
+      & th:nth-child(7) {
+        display: none;
+      }
+    }
+  }
+}

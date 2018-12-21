@@ -117,7 +117,7 @@ class EditDietWrapper extends PureComponent {
     const id = this.props.match.params.id;
     const newDiet = Object.assign(
       { name: this.nameRef.current.value },
-      { food: addedProducts.map(product => ({ id: product.id, grams: product.ref.current.value })) }
+      { food: addedProducts.map(product => ({ id: product.id, grams: +product.ref.current.value })) }
     );
     createRequest(patchDiet, { id }, newDiet).then(({ status, data }) => {
       if (status === 'OK') {

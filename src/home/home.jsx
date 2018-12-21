@@ -7,11 +7,13 @@ class Home extends PureComponent {
 
   render() {
     return (
-      <div className="wrapper home">
+      <div className="home">
         <NavMenu />
-        <p>Добро пожаловать!</p>
-        <p>Чтобы подобрать себе диету, введи свои данные в форму ниже</p>
-        <ChooseDietForm />
+        <div classNam="wrapper">
+          <p>Добро пожаловать!</p>
+          <p>Чтобы подобрать себе диету, введи свои данные в форму ниже</p>
+          <ChooseDietForm />
+        </div>
       </div>
     );
   }

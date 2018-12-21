@@ -20,7 +20,7 @@ class DietTable extends PureComponent {
       },
       {
         label: 'Продукты',
-        className: ''
+        className: 'products'
       },
       {
         label: 'Калории',
@@ -57,7 +57,7 @@ class DietTable extends PureComponent {
             let fullData = this.convertDataToTable(data, FOOD);
             if (BMR) {
               fullData = fullData.filter(
-                element => element[3] >= BMR - 300 && element[3] <= BMR + 300
+                element => element[3] >= +BMR - 300 && element[3] <= +BMR + 300
               );
             }
             this.setState({
@@ -82,7 +82,7 @@ class DietTable extends PureComponent {
         let newItem = Object.values(FOOD.find(FoodItem => FoodItem.id === item.id));
         newItem = newItem.map((foodParam, number) => {
           if (number !== 0 && number !== 1 && number !== 6) {
-            return (foodParam * item.grams) / 100;
+            return Math.floor((foodParam * item.grams) / 100);
           }
           return foodParam;
         });

@@ -52,7 +52,12 @@ class AddFoodForm extends PureComponent {
     createRequest(
       createFood,
       null,
-      this.fields.map(item => ({ [item.name]: item.ref.current.value })).reduce(reducer)
+      this.fields.map((item, index) => {
+        if (index === 0 || index === 5) {
+          return { [item.name]: item.ref.current.value };
+        }
+        return { [item.name]: +item.ref.current.value };
+      }).reduce(reducer)
     ).then(({ status }) => {
       if (status === 'OK') {
         this.changeBannerStatus(true);
@@ -85,7 +90,7 @@ class AddFoodForm extends PureComponent {
                 pattern={`${
                   index === 1 || index === 2 || index === 3 || index === 4
                     ? '/[0-9]{,5}/'
-                    : '^[A-Za-zА-Яа-яЁё]+$'
+                    : '*'
                 }`}
                 ref={item.ref}
               />

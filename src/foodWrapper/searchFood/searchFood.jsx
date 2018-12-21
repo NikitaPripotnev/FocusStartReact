@@ -7,7 +7,7 @@ class SearchFood extends PureComponent {
 
   state = {
     banner: false
-  }
+  };
 
   changeBannerStatus = (flag) => {
     this.setState({ banner: flag });
@@ -23,7 +23,9 @@ class SearchFood extends PureComponent {
       this.textRef.current.value = '';
     } else {
       this.changeBannerStatus(true);
-      setTimeout(() => { this.changeBannerStatus(false); }, 4000);
+      setTimeout(() => {
+        this.changeBannerStatus(false);
+      }, 4000);
     }
   };
 
@@ -32,12 +34,23 @@ class SearchFood extends PureComponent {
     return (
       <div>
         <form className="form-search" onSubmit={this.onSubmit}>
-          <input type="text" className="input form-search__input" name="text" ref={this.textRef} />
+          <input
+            type="text"
+            className="input form-search__input"
+            autoComplete="off"
+            name="text"
+            ref={this.textRef}
+          />
           <button type="submit" className="button form-search__button">
             Поиск
           </button>
         </form>
-        {banner && <BannerWarning message="Вы ничего не ввели, поэтому ничего не нашлось :(" changeBannerStatus={this.changeBannerStatus} />}
+        {banner && (
+          <BannerWarning
+            message="Вы ничего не ввели, поэтому ничего не нашлось :("
+            changeBannerStatus={this.changeBannerStatus}
+          />
+        )}
       </div>
     );
   }

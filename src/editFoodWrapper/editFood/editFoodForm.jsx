@@ -62,14 +62,21 @@ class EditFood extends PureComponent {
   };
 
   onSubmit = (event) => {
-    const { id } = this.state;
+    const { id } = this.props;
 
     event.preventDefault();
     const reducer = (accumulator, currentValue) => Object.assign(accumulator, currentValue);
     createRequest(
       patchFood,
       { id },
-      this.fields.map(item => ({ [item.name]: item.ref.current.value })).reduce(reducer)
+      this.fields
+        .map((item, index) => {
+          if (index === 0 || index === 5) {
+            return { [item.name]: item.ref.current.value };
+          }
+          return { [item.name]: +item.ref.current.value };
+        })
+        .reduce(reducer)
     ).then(({ status, data }) => {
       if (status === 'OK') {
         this.changeBannerStatus(true);
